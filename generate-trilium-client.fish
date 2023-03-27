@@ -2,8 +2,8 @@
 # Define the URL of the YAML file
 set url https://github.com/zadam/trilium/blob/master/src/etapi/etapi.openapi.yaml
 
-# Download the YAML file using curl and save it as etapi.yaml
-curl -L $url -o etapi.yaml
+# Download the YAML file using wget and save it as etapi.yaml
+wget --output-document etapi.yaml $url 
 
 # Check if virtualenv is installed
 if not type -q virtualenv
