@@ -28,5 +28,6 @@ steps:
     - fish --version
     - chmod +x generate-trilium-client.fish
     - fish generate-trilium-client.fish
+    - git add .
     - git diff --quiet && git diff --staged --quiet || git commit -am '[DRONE] [CI SKIP] Updated client'
     - git push --set-upstream origin master
