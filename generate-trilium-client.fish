@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 # Define the URL of the YAML file
-set url https://raw.github.com/zadam/trilium/blob/master/src/etapi/etapi.openapi.yaml
+set url https://raw.githubusercontent.com/zadam/trilium/master/src/etapi/etapi.openapi.yaml
 
 # Download the YAML file using wget and save it as etapi.yaml
 wget --output-document etapi.yaml $url 
