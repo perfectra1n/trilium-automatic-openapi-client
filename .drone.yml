@@ -11,6 +11,12 @@ steps:
   commands:
     - git checkout master
 
+- name: Print the git status
+  image: python:bullseye
+  commands:
+    - git status
+    - echo "Current commit is $(git log --pretty=format:'%h' -n 1)"
+
 - name: Install additional software
   image: python:bullseye
   commands:
@@ -20,16 +26,6 @@ steps:
     - apt update
     - apt install -y fish
     - fish --version
-
-- name: Print the git status
-  image: python:bullseye
-  commands:
-    - git status
-    - echo "Current commit is $(git log --pretty=format:'%h' -n 1)"
-
-- name: Update Trilium client
-  image: python:bullseye
-  commands:
     - chmod +x generate-trilium-client.fish
     - fish generate-trilium-client.fish
     - git diff --quiet && git diff --staged --quiet || git commit -am '[DRONE] [CI SKIP] Updated client'
