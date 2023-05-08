@@ -12,18 +12,18 @@ class Branch:
     """Branch places the note into the tree, it represents the relationship between a parent note and child note
 
     Attributes:
-        note_id (str):  Example: evnnmvHTCgIn.
-        parent_note_id (str):  Example: evnnmvHTCgIn.
         branch_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        parent_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
         prefix (Union[Unset, str]):
         note_position (Union[Unset, int]):
         is_expanded (Union[Unset, bool]):
         utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.939000+00:00.
     """
 
-    note_id: str
-    parent_note_id: str
     branch_id: Union[Unset, str] = UNSET
+    note_id: Union[Unset, str] = UNSET
+    parent_note_id: Union[Unset, str] = UNSET
     prefix: Union[Unset, str] = UNSET
     note_position: Union[Unset, int] = UNSET
     is_expanded: Union[Unset, bool] = UNSET
@@ -31,9 +31,9 @@ class Branch:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        branch_id = self.branch_id
         note_id = self.note_id
         parent_note_id = self.parent_note_id
-        branch_id = self.branch_id
         prefix = self.prefix
         note_position = self.note_position
         is_expanded = self.is_expanded
@@ -41,14 +41,13 @@ class Branch:
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "noteId": note_id,
-                "parentNoteId": parent_note_id,
-            }
-        )
+        field_dict.update({})
         if branch_id is not UNSET:
             field_dict["branchId"] = branch_id
+        if note_id is not UNSET:
+            field_dict["noteId"] = note_id
+        if parent_note_id is not UNSET:
+            field_dict["parentNoteId"] = parent_note_id
         if prefix is not UNSET:
             field_dict["prefix"] = prefix
         if note_position is not UNSET:
@@ -63,11 +62,11 @@ class Branch:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        note_id = d.pop("noteId")
-
-        parent_note_id = d.pop("parentNoteId")
-
         branch_id = d.pop("branchId", UNSET)
+
+        note_id = d.pop("noteId", UNSET)
+
+        parent_note_id = d.pop("parentNoteId", UNSET)
 
         prefix = d.pop("prefix", UNSET)
 
@@ -78,9 +77,9 @@ class Branch:
         utc_date_modified = d.pop("utcDateModified", UNSET)
 
         branch = cls(
+            branch_id=branch_id,
             note_id=note_id,
             parent_note_id=parent_note_id,
-            branch_id=branch_id,
             prefix=prefix,
             note_position=note_position,
             is_expanded=is_expanded,

@@ -13,8 +13,8 @@ class Attribute:
     """Attribute (Label, Relation) is a key-value record attached to a note.
 
     Attributes:
-        note_id (str):  Example: evnnmvHTCgIn.
         attribute_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
         type (Union[Unset, AttributeType]):
         name (Union[Unset, str]):  Example: shareCss.
         value (Union[Unset, str]):
@@ -23,8 +23,8 @@ class Attribute:
         utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.939000+00:00.
     """
 
-    note_id: str
     attribute_id: Union[Unset, str] = UNSET
+    note_id: Union[Unset, str] = UNSET
     type: Union[Unset, AttributeType] = UNSET
     name: Union[Unset, str] = UNSET
     value: Union[Unset, str] = UNSET
@@ -34,8 +34,8 @@ class Attribute:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        note_id = self.note_id
         attribute_id = self.attribute_id
+        note_id = self.note_id
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
@@ -48,13 +48,11 @@ class Attribute:
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "noteId": note_id,
-            }
-        )
+        field_dict.update({})
         if attribute_id is not UNSET:
             field_dict["attributeId"] = attribute_id
+        if note_id is not UNSET:
+            field_dict["noteId"] = note_id
         if type is not UNSET:
             field_dict["type"] = type
         if name is not UNSET:
@@ -73,9 +71,9 @@ class Attribute:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        note_id = d.pop("noteId")
-
         attribute_id = d.pop("attributeId", UNSET)
+
+        note_id = d.pop("noteId", UNSET)
 
         _type = d.pop("type", UNSET)
         type: Union[Unset, AttributeType]
@@ -95,8 +93,8 @@ class Attribute:
         utc_date_modified = d.pop("utcDateModified", UNSET)
 
         attribute = cls(
-            note_id=note_id,
             attribute_id=attribute_id,
+            note_id=note_id,
             type=type,
             name=name,
             value=value,

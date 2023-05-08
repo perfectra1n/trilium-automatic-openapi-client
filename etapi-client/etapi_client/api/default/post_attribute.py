@@ -10,12 +10,11 @@ from ...types import Response
 
 
 def _get_kwargs(
-    attribute_id: str,
     *,
     client: Client,
     json_body: Attribute,
 ) -> Dict[str, Any]:
-    url = "{}/attributes/{attributeId}".format(client.base_url, attributeId=attribute_id)
+    url = "{}/attributes".format(client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -33,18 +32,14 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Attribute]:
-    if response.status_code == HTTPStatus.CREATED:
-        response_201 = Attribute.from_dict(response.json())
-
-        return response_201
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Attribute]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -54,15 +49,13 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Att
 
 
 def sync_detailed(
-    attribute_id: str,
     *,
     client: Client,
     json_body: Attribute,
-) -> Response[Attribute]:
+) -> Response[Any]:
     """create an attribute for a given note
 
     Args:
-        attribute_id (str):  Example: evnnmvHTCgIn.
         json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
             note.
 
@@ -71,11 +64,10 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Attribute]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
-        attribute_id=attribute_id,
         client=client,
         json_body=json_body,
     )
@@ -88,44 +80,14 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    attribute_id: str,
-    *,
-    client: Client,
-    json_body: Attribute,
-) -> Optional[Attribute]:
-    """create an attribute for a given note
-
-    Args:
-        attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Attribute
-    """
-
-    return sync_detailed(
-        attribute_id=attribute_id,
-        client=client,
-        json_body=json_body,
-    ).parsed
-
-
 async def asyncio_detailed(
-    attribute_id: str,
     *,
     client: Client,
     json_body: Attribute,
-) -> Response[Attribute]:
+) -> Response[Any]:
     """create an attribute for a given note
 
     Args:
-        attribute_id (str):  Example: evnnmvHTCgIn.
         json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
             note.
 
@@ -134,11 +96,10 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Attribute]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
-        attribute_id=attribute_id,
         client=client,
         json_body=json_body,
     )
@@ -147,33 +108,3 @@ async def asyncio_detailed(
         response = await _client.request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    attribute_id: str,
-    *,
-    client: Client,
-    json_body: Attribute,
-) -> Optional[Attribute]:
-    """create an attribute for a given note
-
-    Args:
-        attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Attribute
-    """
-
-    return (
-        await asyncio_detailed(
-            attribute_id=attribute_id,
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed

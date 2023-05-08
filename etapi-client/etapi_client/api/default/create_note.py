@@ -6,7 +6,6 @@ import httpx
 from ... import errors
 from ...client import Client
 from ...models.create_note_def import CreateNoteDef
-from ...models.create_note_response_201 import CreateNoteResponse201
 from ...types import Response
 
 
@@ -33,18 +32,14 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[CreateNoteResponse201]:
-    if response.status_code == HTTPStatus.CREATED:
-        response_201 = CreateNoteResponse201.from_dict(response.json())
-
-        return response_201
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[CreateNoteResponse201]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,7 +52,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: CreateNoteDef,
-) -> Response[CreateNoteResponse201]:
+) -> Response[Any]:
     """Create a note and place it into the note tree
 
     Args:
@@ -68,7 +63,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CreateNoteResponse201]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -84,35 +79,11 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    *,
-    client: Client,
-    json_body: CreateNoteDef,
-) -> Optional[CreateNoteResponse201]:
-    """Create a note and place it into the note tree
-
-    Args:
-        json_body (CreateNoteDef):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        CreateNoteResponse201
-    """
-
-    return sync_detailed(
-        client=client,
-        json_body=json_body,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: Client,
     json_body: CreateNoteDef,
-) -> Response[CreateNoteResponse201]:
+) -> Response[Any]:
     """Create a note and place it into the note tree
 
     Args:
@@ -123,7 +94,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CreateNoteResponse201]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -135,29 +106,3 @@ async def asyncio_detailed(
         response = await _client.request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    *,
-    client: Client,
-    json_body: CreateNoteDef,
-) -> Optional[CreateNoteResponse201]:
-    """Create a note and place it into the note tree
-
-    Args:
-        json_body (CreateNoteDef):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        CreateNoteResponse201
-    """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed

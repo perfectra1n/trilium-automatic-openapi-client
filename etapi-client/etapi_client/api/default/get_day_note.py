@@ -6,7 +6,6 @@ import httpx
 
 from ... import errors
 from ...client import Client
-from ...models.note import Note
 from ...types import Response
 
 
@@ -30,18 +29,14 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Note]:
-    if response.status_code == HTTPStatus.OK:
-        response_200 = Note.from_dict(response.json())
-
-        return response_200
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Note]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -54,7 +49,7 @@ def sync_detailed(
     date: datetime.date,
     *,
     client: Client,
-) -> Response[Note]:
+) -> Response[Any]:
     """returns a day note for a given date. Gets created if doesn't exist.
 
     Args:
@@ -65,7 +60,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -81,35 +76,11 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    date: datetime.date,
-    *,
-    client: Client,
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
-
-    Args:
-        date (datetime.date):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Note
-    """
-
-    return sync_detailed(
-        date=date,
-        client=client,
-    ).parsed
-
-
 async def asyncio_detailed(
     date: datetime.date,
     *,
     client: Client,
-) -> Response[Note]:
+) -> Response[Any]:
     """returns a day note for a given date. Gets created if doesn't exist.
 
     Args:
@@ -120,7 +91,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -132,29 +103,3 @@ async def asyncio_detailed(
         response = await _client.request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    date: datetime.date,
-    *,
-    client: Client,
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
-
-    Args:
-        date (datetime.date):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Note
-    """
-
-    return (
-        await asyncio_detailed(
-            date=date,
-            client=client,
-        )
-    ).parsed

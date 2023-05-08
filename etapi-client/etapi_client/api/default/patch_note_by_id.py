@@ -33,18 +33,14 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Note]:
-    if response.status_code == HTTPStatus.OK:
-        response_200 = Note.from_dict(response.json())
-
-        return response_200
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Note]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,7 +54,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: Note,
-) -> Response[Note]:
+) -> Response[Any]:
     """patch a note identified by the noteId with changes in the body
 
     Args:
@@ -70,7 +66,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -87,39 +83,12 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    note_id: str,
-    *,
-    client: Client,
-    json_body: Note,
-) -> Optional[Note]:
-    """patch a note identified by the noteId with changes in the body
-
-    Args:
-        note_id (str):  Example: evnnmvHTCgIn.
-        json_body (Note):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Note
-    """
-
-    return sync_detailed(
-        note_id=note_id,
-        client=client,
-        json_body=json_body,
-    ).parsed
-
-
 async def asyncio_detailed(
     note_id: str,
     *,
     client: Client,
     json_body: Note,
-) -> Response[Note]:
+) -> Response[Any]:
     """patch a note identified by the noteId with changes in the body
 
     Args:
@@ -131,7 +100,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -144,32 +113,3 @@ async def asyncio_detailed(
         response = await _client.request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    note_id: str,
-    *,
-    client: Client,
-    json_body: Note,
-) -> Optional[Note]:
-    """patch a note identified by the noteId with changes in the body
-
-    Args:
-        note_id (str):  Example: evnnmvHTCgIn.
-        json_body (Note):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        Note
-    """
-
-    return (
-        await asyncio_detailed(
-            note_id=note_id,
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed
