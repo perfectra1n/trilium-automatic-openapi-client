@@ -55,7 +55,9 @@ def sync_detailed(
     client: Client,
     json_body: Branch,
 ) -> Response[Any]:
-    """patch a branch identified by the branchId with changes in the body
+    """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
+    be updated. If you want to update other properties, you need to delete the old branch and create a
+    new one.
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.
@@ -90,7 +92,9 @@ async def asyncio_detailed(
     client: Client,
     json_body: Branch,
 ) -> Response[Any]:
-    """patch a branch identified by the branchId with changes in the body
+    """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
+    be updated. If you want to update other properties, you need to delete the old branch and create a
+    new one.
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.

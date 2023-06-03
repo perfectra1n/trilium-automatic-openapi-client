@@ -55,7 +55,9 @@ def sync_detailed(
     client: Client,
     json_body: Attribute,
 ) -> Response[Any]:
-    """patch a attribute identified by the attributeId with changes in the body
+    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
+    position can be updated. For relations, only position can be updated. If you want to modify other
+    properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
@@ -90,7 +92,9 @@ async def asyncio_detailed(
     client: Client,
     json_body: Attribute,
 ) -> Response[Any]:
-    """patch a attribute identified by the attributeId with changes in the body
+    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
+    position can be updated. For relations, only position can be updated. If you want to modify other
+    properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
