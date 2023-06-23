@@ -51,7 +51,7 @@ def sync_detailed(
     *,
     client: Client,
 ) -> Response[Any]:
-    """Updates note content idenfied by its ID
+    """Updates note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
@@ -82,7 +82,7 @@ async def asyncio_detailed(
     *,
     client: Client,
 ) -> Response[Any]:
-    """Updates note content idenfied by its ID
+    """Updates note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.

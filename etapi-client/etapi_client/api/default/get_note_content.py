@@ -52,7 +52,7 @@ def sync_detailed(
     *,
     client: Client,
 ) -> Response[str]:
-    """Returns note content idenfied by its ID
+    """Returns note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
@@ -83,7 +83,7 @@ def sync(
     *,
     client: Client,
 ) -> Optional[str]:
-    """Returns note content idenfied by its ID
+    """Returns note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
@@ -107,7 +107,7 @@ async def asyncio_detailed(
     *,
     client: Client,
 ) -> Response[str]:
-    """Returns note content idenfied by its ID
+    """Returns note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
@@ -136,7 +136,7 @@ async def asyncio(
     *,
     client: Client,
 ) -> Optional[str]:
-    """Returns note content idenfied by its ID
+    """Returns note content identified by its ID
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
