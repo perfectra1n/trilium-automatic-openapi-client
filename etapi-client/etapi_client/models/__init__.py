@@ -12,6 +12,7 @@ from .export_note_subtree_format import ExportNoteSubtreeFormat
 from .login_json_body import LoginJsonBody
 from .note import Note
 from .note_type import NoteType
+from .note_with_branch import NoteWithBranch
 from .search_notes_order_direction import SearchNotesOrderDirection
 from .search_response import SearchResponse
 from .search_response_debug_info import SearchResponseDebugInfo
@@ -29,6 +30,7 @@ __all__ = (
     "LoginJsonBody",
     "Note",
     "NoteType",
+    "NoteWithBranch",
     "SearchNotesOrderDirection",
     "SearchResponse",
     "SearchResponseDebugInfo",
