@@ -5,7 +5,7 @@ import httpx
 
 from ... import errors
 from ...client import Client
-from ...models.create_note_revision_format import CreateNoteRevisionFormat
+from ...models.create_revision_format import CreateRevisionFormat
 from ...types import UNSET, Response, Unset
 
 
@@ -13,9 +13,9 @@ def _get_kwargs(
     note_id: str,
     *,
     client: Client,
-    format_: Union[Unset, None, CreateNoteRevisionFormat] = CreateNoteRevisionFormat.HTML,
+    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Dict[str, Any]:
-    url = "{}/notes/{noteId}/note-revision".format(client.base_url, noteId=note_id)
+    url = "{}/notes/{noteId}/revision".format(client.base_url, noteId=note_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -62,14 +62,13 @@ def sync_detailed(
     note_id: str,
     *,
     client: Client,
-    format_: Union[Unset, None, CreateNoteRevisionFormat] = CreateNoteRevisionFormat.HTML,
+    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, None, CreateNoteRevisionFormat]):  Default:
-            CreateNoteRevisionFormat.HTML.
+        format_ (Union[Unset, None, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -97,14 +96,13 @@ async def asyncio_detailed(
     note_id: str,
     *,
     client: Client,
-    format_: Union[Unset, None, CreateNoteRevisionFormat] = CreateNoteRevisionFormat.HTML,
+    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, None, CreateNoteRevisionFormat]):  Default:
-            CreateNoteRevisionFormat.HTML.
+        format_ (Union[Unset, None, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

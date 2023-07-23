@@ -308,7 +308,7 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-  /notes/{noteId}/note-revision:
+  /notes/{noteId}/revision:
     parameters:
       - name: noteId
         in: path
@@ -325,7 +325,7 @@ paths:
           default: html
     post:
       description: Create a note revision for the given note
-      operationId: createNoteRevision
+      operationId: createRevision
       responses:
         '204':
           description: revision has been created
@@ -818,6 +818,9 @@ components:
         isProtected:
           type: boolean
           readOnly: true
+        blobId:
+          type: string
+          description: ID of the blob object which effectively serves as a content hash
         attributes:
           $ref: '#/components/schemas/AttributeList'
           readOnly: true

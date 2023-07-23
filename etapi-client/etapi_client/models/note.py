@@ -21,6 +21,7 @@ class Note:
         type (Union[Unset, NoteType]):
         mime (Union[Unset, str]):
         is_protected (Union[Unset, bool]):
+        blob_id (Union[Unset, str]): ID of the blob object which effectively serves as a content hash
         attributes (Union[Unset, List['Attribute']]):
         parent_note_ids (Union[Unset, List[str]]):
         child_note_ids (Union[Unset, List[str]]):
@@ -37,6 +38,7 @@ class Note:
     type: Union[Unset, NoteType] = UNSET
     mime: Union[Unset, str] = UNSET
     is_protected: Union[Unset, bool] = UNSET
+    blob_id: Union[Unset, str] = UNSET
     attributes: Union[Unset, List["Attribute"]] = UNSET
     parent_note_ids: Union[Unset, List[str]] = UNSET
     child_note_ids: Union[Unset, List[str]] = UNSET
@@ -57,6 +59,7 @@ class Note:
 
         mime = self.mime
         is_protected = self.is_protected
+        blob_id = self.blob_id
         attributes: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = []
@@ -99,6 +102,8 @@ class Note:
             field_dict["mime"] = mime
         if is_protected is not UNSET:
             field_dict["isProtected"] = is_protected
+        if blob_id is not UNSET:
+            field_dict["blobId"] = blob_id
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
         if parent_note_ids is not UNSET:
@@ -140,6 +145,8 @@ class Note:
 
         is_protected = d.pop("isProtected", UNSET)
 
+        blob_id = d.pop("blobId", UNSET)
+
         attributes = []
         _attributes = d.pop("attributes", UNSET)
         for componentsschemas_attribute_list_item_data in _attributes or []:
@@ -169,6 +176,7 @@ class Note:
             type=type,
             mime=mime,
             is_protected=is_protected,
+            blob_id=blob_id,
             attributes=attributes,
             parent_note_ids=parent_note_ids,
             child_note_ids=child_note_ids,

@@ -6,7 +6,7 @@ from .attribute_type import AttributeType
 from .branch import Branch
 from .create_note_def import CreateNoteDef
 from .create_note_def_type import CreateNoteDefType
-from .create_note_revision_format import CreateNoteRevisionFormat
+from .create_revision_format import CreateRevisionFormat
 from .error import Error
 from .export_note_subtree_format import ExportNoteSubtreeFormat
 from .login_json_body import LoginJsonBody
@@ -24,7 +24,7 @@ __all__ = (
     "Branch",
     "CreateNoteDef",
     "CreateNoteDefType",
-    "CreateNoteRevisionFormat",
+    "CreateRevisionFormat",
     "Error",
     "ExportNoteSubtreeFormat",
     "LoginJsonBody",

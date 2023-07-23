@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class CreateNoteRevisionFormat(str, Enum):
+class CreateRevisionFormat(str, Enum):
     HTML = "html"
     MARKDOWN = "markdown"
 
