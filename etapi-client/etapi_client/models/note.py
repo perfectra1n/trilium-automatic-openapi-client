@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
-import attr
+from attrs import define, field
 
 from ..models.note_type import NoteType
 from ..types import UNSET, Unset
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="Note")
 
 
-@attr.s(auto_attribs=True)
+@define
 class Note:
     """
     Attributes:
@@ -48,7 +48,7 @@ class Note:
     date_modified: Union[Unset, str] = UNSET
     utc_date_created: Union[Unset, str] = UNSET
     utc_date_modified: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         note_id = self.note_id

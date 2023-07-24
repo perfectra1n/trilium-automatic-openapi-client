@@ -1,42 +1,35 @@
 import datetime
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...types import Response
 
 
 def _get_kwargs(
     date: datetime.date,
-    *,
-    client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/inbox/{date}".format(client.base_url, date=date)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/inbox/{date}".format(
+            date=date,
+        ),
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -48,7 +41,7 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Any
 def sync_detailed(
     date: datetime.date,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
     r"""returns an \"inbox\" note, into which note can be created. Date will be used depending on whether
     the inbox is a fixed note (identified with #inbox label) or a day note in a journal.
@@ -66,11 +59,9 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         date=date,
-        client=client,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -80,7 +71,7 @@ def sync_detailed(
 async def asyncio_detailed(
     date: datetime.date,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
     r"""returns an \"inbox\" note, into which note can be created. Date will be used depending on whether
     the inbox is a fixed note (identified with #inbox label) or a day note in a journal.
@@ -98,10 +89,8 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         date=date,
-        client=client,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

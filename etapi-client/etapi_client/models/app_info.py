@@ -1,7 +1,7 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -9,7 +9,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="AppInfo")
 
 
-@attr.s(auto_attribs=True)
+@define
 class AppInfo:
     """
     Attributes:
@@ -32,7 +32,7 @@ class AppInfo:
     data_directory: Union[Unset, str] = UNSET
     clipper_protocol_version: Union[Unset, str] = UNSET
     utc_date_time: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         app_version = self.app_version

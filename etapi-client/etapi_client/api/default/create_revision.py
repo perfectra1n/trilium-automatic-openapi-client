@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.create_revision_format import CreateRevisionFormat
 from ...types import UNSET, Response, Unset
 
@@ -12,13 +12,9 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     note_id: str,
     *,
-    client: Client,
     format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Dict[str, Any]:
-    url = "{}/notes/{noteId}/revision".format(client.base_url, noteId=note_id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     params: Dict[str, Any] = {}
     json_format_: Union[Unset, None, str] = UNSET
@@ -31,16 +27,14 @@ def _get_kwargs(
 
     return {
         "method": "post",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/notes/{noteId}/revision".format(
+            noteId=note_id,
+        ),
         "params": params,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if client.raise_on_unexpected_status:
@@ -49,7 +43,7 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,7 +55,7 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Any
 def sync_detailed(
     note_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
@@ -80,12 +74,10 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         note_id=note_id,
-        client=client,
         format_=format_,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -95,7 +87,7 @@ def sync_detailed(
 async def asyncio_detailed(
     note_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
@@ -114,11 +106,9 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         note_id=note_id,
-        client=client,
         format_=format_,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

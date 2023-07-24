@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="NoteWithBranch")
 
 
-@attr.s(auto_attribs=True)
+@define
 class NoteWithBranch:
     """
     Attributes:
@@ -23,7 +23,7 @@ class NoteWithBranch:
 
     note: Union[Unset, "Note"] = UNSET
     branch: Union[Unset, "Branch"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         note: Union[Unset, Dict[str, Any]] = UNSET

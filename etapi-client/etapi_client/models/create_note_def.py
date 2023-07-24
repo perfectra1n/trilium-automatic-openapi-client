@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.create_note_def_type import CreateNoteDefType
 from ..types import UNSET, Unset
@@ -8,7 +8,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="CreateNoteDef")
 
 
-@attr.s(auto_attribs=True)
+@define
 class CreateNoteDef:
     """
     Attributes:
@@ -38,7 +38,7 @@ class CreateNoteDef:
     is_expanded: Union[Unset, bool] = UNSET
     note_id: Union[Unset, str] = UNSET
     branch_id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         parent_note_id = self.parent_note_id

@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.attribute_type import AttributeType
 from ..types import UNSET, Unset
@@ -8,7 +8,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="Attribute")
 
 
-@attr.s(auto_attribs=True)
+@define
 class Attribute:
     """Attribute (Label, Relation) is a key-value record attached to a note.
 
@@ -31,7 +31,7 @@ class Attribute:
     position: Union[Unset, int] = UNSET
     is_inheritable: Union[Unset, bool] = UNSET
     utc_date_modified: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         attribute_id = self.attribute_id
