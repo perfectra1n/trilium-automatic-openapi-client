@@ -1,11 +1,12 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 T = TypeVar("T", bound="Error")
 
 
-@define
+@_attrs_define
 class Error:
     """
     Attributes:
@@ -18,7 +19,7 @@ class Error:
     status: int
     code: str
     message: str
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         status = self.status

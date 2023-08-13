@@ -1,13 +1,14 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Branch")
 
 
-@define
+@_attrs_define
 class Branch:
     """Branch places the note into the tree, it represents the relationship between a parent note and child note
 
@@ -28,7 +29,7 @@ class Branch:
     note_position: Union[Unset, int] = UNSET
     is_expanded: Union[Unset, bool] = UNSET
     utc_date_modified: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         branch_id = self.branch_id
