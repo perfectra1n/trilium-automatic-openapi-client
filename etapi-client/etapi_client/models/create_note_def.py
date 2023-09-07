@@ -27,6 +27,8 @@ class CreateNoteDef:
         is_expanded (Union[Unset, bool]): true if this note (as a folder) should appear expanded
         note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
         branch_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        date_created (Union[Unset, str]):  Example: 2021-12-31 20:18:11.930+0100.
+        utc_date_created (Union[Unset, str]):  Example: 2021-12-31 19:18:11.930000+00:00.
     """
 
     parent_note_id: str
@@ -39,6 +41,8 @@ class CreateNoteDef:
     is_expanded: Union[Unset, bool] = UNSET
     note_id: Union[Unset, str] = UNSET
     branch_id: Union[Unset, str] = UNSET
+    date_created: Union[Unset, str] = UNSET
+    utc_date_created: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -53,6 +57,8 @@ class CreateNoteDef:
         is_expanded = self.is_expanded
         note_id = self.note_id
         branch_id = self.branch_id
+        date_created = self.date_created
+        utc_date_created = self.utc_date_created
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -76,6 +82,10 @@ class CreateNoteDef:
             field_dict["noteId"] = note_id
         if branch_id is not UNSET:
             field_dict["branchId"] = branch_id
+        if date_created is not UNSET:
+            field_dict["dateCreated"] = date_created
+        if utc_date_created is not UNSET:
+            field_dict["utcDateCreated"] = utc_date_created
 
         return field_dict
 
@@ -102,6 +112,10 @@ class CreateNoteDef:
 
         branch_id = d.pop("branchId", UNSET)
 
+        date_created = d.pop("dateCreated", UNSET)
+
+        utc_date_created = d.pop("utcDateCreated", UNSET)
+
         create_note_def = cls(
             parent_note_id=parent_note_id,
             title=title,
@@ -113,6 +127,8 @@ class CreateNoteDef:
             is_expanded=is_expanded,
             note_id=note_id,
             branch_id=branch_id,
+            date_created=date_created,
+            utc_date_created=utc_date_created,
         )
 
         create_note_def.additional_properties = d

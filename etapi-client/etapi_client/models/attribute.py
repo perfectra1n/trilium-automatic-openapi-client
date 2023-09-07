@@ -21,7 +21,7 @@ class Attribute:
         value (Union[Unset, str]):
         position (Union[Unset, int]):
         is_inheritable (Union[Unset, bool]):
-        utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.939000+00:00.
+        utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.930000+00:00.
     """
 
     attribute_id: Union[Unset, str] = UNSET

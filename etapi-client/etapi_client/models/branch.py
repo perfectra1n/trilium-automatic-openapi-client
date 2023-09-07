@@ -19,7 +19,7 @@ class Branch:
         prefix (Union[Unset, str]):
         note_position (Union[Unset, int]):
         is_expanded (Union[Unset, bool]):
-        utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.939000+00:00.
+        utc_date_modified (Union[Unset, str]):  Example: 2021-12-31 19:18:11.930000+00:00.
     """
 
     branch_id: Union[Unset, str] = UNSET
