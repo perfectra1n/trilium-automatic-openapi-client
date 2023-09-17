@@ -27,14 +27,18 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Attribute]:
+    if response.status_code == HTTPStatus.OK:
+        response_200 = Attribute.from_dict(response.json())
+
+        return response_200
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Attribute]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -48,7 +52,7 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     json_body: Attribute,
-) -> Response[Any]:
+) -> Response[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
     properties, you need to delete the old attribute and create a new one.
@@ -63,7 +67,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Response[Attribute]
     """
 
     kwargs = _get_kwargs(
@@ -78,12 +82,12 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-async def asyncio_detailed(
+def sync(
     attribute_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     json_body: Attribute,
-) -> Response[Any]:
+) -> Optional[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
     properties, you need to delete the old attribute and create a new one.
@@ -98,7 +102,37 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Attribute
+    """
+
+    return sync_detailed(
+        attribute_id=attribute_id,
+        client=client,
+        json_body=json_body,
+    ).parsed
+
+
+async def asyncio_detailed(
+    attribute_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    json_body: Attribute,
+) -> Response[Attribute]:
+    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
+    position can be updated. For relations, only position can be updated. If you want to modify other
+    properties, you need to delete the old attribute and create a new one.
+
+    Args:
+        attribute_id (str):  Example: evnnmvHTCgIn.
+        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
+            note.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Attribute]
     """
 
     kwargs = _get_kwargs(
@@ -109,3 +143,35 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    attribute_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    json_body: Attribute,
+) -> Optional[Attribute]:
+    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
+    position can be updated. For relations, only position can be updated. If you want to modify other
+    properties, you need to delete the old attribute and create a new one.
+
+    Args:
+        attribute_id (str):  Example: evnnmvHTCgIn.
+        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
+            note.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Attribute
+    """
+
+    return (
+        await asyncio_detailed(
+            attribute_id=attribute_id,
+            client=client,
+            json_body=json_body,
+        )
+    ).parsed

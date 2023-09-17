@@ -1,11 +1,12 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.login_json_body import LoginJsonBody
+from ...models.login_response_201 import LoginResponse201
 from ...types import Response
 
 
@@ -24,16 +25,25 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Union[Any, LoginResponse201]]:
+    if response.status_code == HTTPStatus.CREATED:
+        response_201 = LoginResponse201.from_dict(response.json())
+
+        return response_201
     if response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-        return None
+        response_429 = cast(Any, None)
+        return response_429
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Union[Any, LoginResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -46,7 +56,7 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     json_body: LoginJsonBody,
-) -> Response[Any]:
+) -> Response[Union[Any, LoginResponse201]]:
     """get an ETAPI token based on password for further use with ETAPI
 
     Args:
@@ -57,7 +67,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Response[Union[Any, LoginResponse201]]
     """
 
     kwargs = _get_kwargs(
@@ -71,11 +81,11 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-async def asyncio_detailed(
+def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     json_body: LoginJsonBody,
-) -> Response[Any]:
+) -> Optional[Union[Any, LoginResponse201]]:
     """get an ETAPI token based on password for further use with ETAPI
 
     Args:
@@ -86,7 +96,31 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Union[Any, LoginResponse201]
+    """
+
+    return sync_detailed(
+        client=client,
+        json_body=json_body,
+    ).parsed
+
+
+async def asyncio_detailed(
+    *,
+    client: Union[AuthenticatedClient, Client],
+    json_body: LoginJsonBody,
+) -> Response[Union[Any, LoginResponse201]]:
+    """get an ETAPI token based on password for further use with ETAPI
+
+    Args:
+        json_body (LoginJsonBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, LoginResponse201]]
     """
 
     kwargs = _get_kwargs(
@@ -96,3 +130,29 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    *,
+    client: Union[AuthenticatedClient, Client],
+    json_body: LoginJsonBody,
+) -> Optional[Union[Any, LoginResponse201]]:
+    """get an ETAPI token based on password for further use with ETAPI
+
+    Args:
+        json_body (LoginJsonBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, LoginResponse201]
+    """
+
+    return (
+        await asyncio_detailed(
+            client=client,
+            json_body=json_body,
+        )
+    ).parsed
