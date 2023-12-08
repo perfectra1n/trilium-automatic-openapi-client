@@ -1,18 +1,16 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...types import Response
+from ... import errors
 
 
 def _get_kwargs(
     note_id: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "get",
         "url": "/notes/{noteId}/content".format(
@@ -21,9 +19,11 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[str]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[str]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = cast(str, response.text)
+        response_200 = response.text
         return response_200
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -31,7 +31,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[str]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

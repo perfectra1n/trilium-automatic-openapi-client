@@ -1,9 +1,16 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
+from typing import List
+
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="Branch")
 

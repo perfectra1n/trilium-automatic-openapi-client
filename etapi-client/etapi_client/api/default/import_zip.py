@@ -3,17 +3,17 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.note_with_branch import NoteWithBranch
 from ...types import Response
+from ... import errors
+
+from ...models.note_with_branch import NoteWithBranch
+from typing import Dict
 
 
 def _get_kwargs(
     note_id: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "post",
         "url": "/notes/{noteId}/import".format(

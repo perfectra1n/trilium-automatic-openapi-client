@@ -3,17 +3,17 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.branch import Branch
 from ...types import Response
+from ... import errors
+
+from ...models.branch import Branch
+from typing import Dict
 
 
 def _get_kwargs(
     branch_id: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "get",
         "url": "/branches/{branchId}".format(
@@ -22,7 +22,9 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Branch]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Branch]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Branch.from_dict(response.json())
 
@@ -33,7 +35,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Branch]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Branch]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

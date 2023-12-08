@@ -3,10 +3,14 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Optional
 from ...models.create_revision_format import CreateRevisionFormat
-from ...types import UNSET, Response, Unset
+from typing import Union
 
 
 def _get_kwargs(
@@ -14,8 +18,6 @@ def _get_kwargs(
     *,
     format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
     json_format_: Union[Unset, None, str] = UNSET
     if not isinstance(format_, Unset):
@@ -34,7 +36,9 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if client.raise_on_unexpected_status:
@@ -43,7 +47,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

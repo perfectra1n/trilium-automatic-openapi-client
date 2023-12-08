@@ -1,20 +1,20 @@
-import datetime
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.note import Note
 from ...types import Response
+from ... import errors
+
+from ...models.note import Note
+import datetime
+from typing import Dict
 
 
 def _get_kwargs(
     date: datetime.date,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "get",
         "url": "/calendar/days/{date}".format(
@@ -23,7 +23,9 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Note]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Note]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Note.from_dict(response.json())
 
@@ -34,7 +36,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Note]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Note]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

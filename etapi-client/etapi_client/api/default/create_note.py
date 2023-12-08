@@ -3,19 +3,19 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response
+from ... import errors
+
 from ...models.create_note_def import CreateNoteDef
 from ...models.note_with_branch import NoteWithBranch
-from ...types import Response
+from typing import Dict
 
 
 def _get_kwargs(
     *,
     json_body: CreateNoteDef,
 ) -> Dict[str, Any]:
-    pass
-
     json_json_body = json_body.to_dict()
 
     return {
