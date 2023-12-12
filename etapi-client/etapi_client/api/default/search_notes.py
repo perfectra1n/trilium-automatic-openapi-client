@@ -8,10 +8,10 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.search_response import SearchResponse
-from typing import Union
-from ...models.search_notes_order_direction import SearchNotesOrderDirection
 from ...types import UNSET, Unset
 from typing import Dict
+from ...models.search_notes_order_direction import SearchNotesOrderDirection
+from typing import Union
 from typing import Optional
 
 
