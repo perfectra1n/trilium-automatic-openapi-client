@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.note_with_branch import NoteWithBranch
-from ...models.create_note_def import CreateNoteDef
 from typing import Dict
+from ...models.create_note_def import CreateNoteDef
+from ...models.note_with_branch import NoteWithBranch
 
 
 def _get_kwargs(
