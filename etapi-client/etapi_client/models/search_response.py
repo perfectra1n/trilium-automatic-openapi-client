@@ -8,10 +8,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import List
-from typing import Union
 from typing import Dict
+from typing import List
 from ..types import UNSET, Unset
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.note import Note

@@ -8,9 +8,9 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.create_revision_format import CreateRevisionFormat
-from ...types import UNSET, Unset
 from typing import Union
 from typing import Optional
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
