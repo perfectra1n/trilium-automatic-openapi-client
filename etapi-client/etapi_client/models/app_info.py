@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 import datetime
 from typing import Union
-from ..types import UNSET, Unset
 from dateutil.parser import isoparse
 
 
