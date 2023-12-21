@@ -7,12 +7,12 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...types import UNSET, Unset
-from typing import Dict
 from ...models.search_notes_order_direction import SearchNotesOrderDirection
 from typing import Optional
-from typing import Union
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.search_response import SearchResponse
+from typing import Union
 
 
 def _get_kwargs(
