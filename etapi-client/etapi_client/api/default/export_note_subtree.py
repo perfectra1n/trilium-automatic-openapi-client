@@ -8,9 +8,9 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.export_note_subtree_format import ExportNoteSubtreeFormat
-from typing import Optional
-from typing import Union
 from ...types import UNSET, Unset
+from typing import Union
+from typing import Optional
 
 
 def _get_kwargs(
