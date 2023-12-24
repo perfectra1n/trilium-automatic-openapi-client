@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.attribute_type import AttributeType
-from typing import Union
 from ..types import UNSET, Unset
+from typing import Union
+from ..models.attribute_type import AttributeType
 
 
 T = TypeVar("T", bound="Attribute")
