@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.export_note_subtree_format import ExportNoteSubtreeFormat
-from typing import Union
 from ...types import UNSET, Unset
+from ...models.export_note_subtree_format import ExportNoteSubtreeFormat
 from typing import Optional
+from typing import Union
 
 
 def _get_kwargs(

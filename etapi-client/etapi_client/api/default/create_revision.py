@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Union
 from ...types import UNSET, Unset
 from ...models.create_revision_format import CreateRevisionFormat
 from typing import Optional
+from typing import Union
 
 
 def _get_kwargs(
