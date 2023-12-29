@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.login_json_body import LoginJsonBody
 from typing import cast
+from ...models.login_json_body import LoginJsonBody
 from ...models.login_response_201 import LoginResponse201
 from typing import Dict
 
