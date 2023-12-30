@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 import datetime
-from ...models.note import Note
 from typing import Dict
+from ...models.note import Note
 
 
 def _get_kwargs(
