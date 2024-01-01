@@ -7,33 +7,35 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...types import UNSET, Unset
-from typing import Union
-from typing import Optional
 from ...models.create_revision_format import CreateRevisionFormat
+from typing import Union
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
     note_id: str,
     *,
-    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
+    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Dict[str, Any]:
     params: Dict[str, Any] = {}
-    json_format_: Union[Unset, None, str] = UNSET
+
+    json_format_: Union[Unset, str] = UNSET
     if not isinstance(format_, Unset):
-        json_format_ = format_.value if format_ else None
+        json_format_ = format_.value
 
     params["format"] = json_format_
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/notes/{noteId}/revision".format(
             noteId=note_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -62,13 +64,13 @@ def sync_detailed(
     note_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
+    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, None, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
+        format_ (Union[Unset, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -94,13 +96,13 @@ async def asyncio_detailed(
     note_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    format_: Union[Unset, None, CreateRevisionFormat] = CreateRevisionFormat.HTML,
+    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
     """Create a note revision for the given note
 
     Args:
         note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, None, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
+        format_ (Union[Unset, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

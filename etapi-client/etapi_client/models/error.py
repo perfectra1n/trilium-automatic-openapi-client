@@ -27,7 +27,9 @@ class Error:
 
     def to_dict(self) -> Dict[str, Any]:
         status = self.status
+
         code = self.code
+
         message = self.message
 
         field_dict: Dict[str, Any] = {}

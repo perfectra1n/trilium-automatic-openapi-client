@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import Union
 from ..models.attribute_type import AttributeType
+from typing import Union
+from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="Attribute")
@@ -43,15 +43,21 @@ class Attribute:
 
     def to_dict(self) -> Dict[str, Any]:
         attribute_id = self.attribute_id
+
         note_id = self.note_id
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         name = self.name
+
         value = self.value
+
         position = self.position
+
         is_inheritable = self.is_inheritable
+
         utc_date_modified = self.utc_date_modified
 
         field_dict: Dict[str, Any] = {}

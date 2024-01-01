@@ -7,19 +7,21 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.note import Note
 from typing import Dict
+from ...models.note import Note
 
 
 def _get_kwargs(
     note_id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/notes/{noteId}".format(
             noteId=note_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
 from ..models.create_note_def_type import CreateNoteDefType
 from ..types import UNSET, Unset
-from typing import Union
 
 
 T = TypeVar("T", bound="CreateNoteDef")
@@ -54,17 +54,27 @@ class CreateNoteDef:
 
     def to_dict(self) -> Dict[str, Any]:
         parent_note_id = self.parent_note_id
+
         title = self.title
+
         type = self.type.value
 
         content = self.content
+
         mime = self.mime
+
         note_position = self.note_position
+
         prefix = self.prefix
+
         is_expanded = self.is_expanded
+
         note_id = self.note_id
+
         branch_id = self.branch_id
+
         date_created = self.date_created
+
         utc_date_created = self.utc_date_created
 
         field_dict: Dict[str, Any] = {}

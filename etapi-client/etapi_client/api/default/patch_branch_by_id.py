@@ -14,17 +14,24 @@ from typing import Dict
 def _get_kwargs(
     branch_id: str,
     *,
-    json_body: Branch,
+    body: Branch,
 ) -> Dict[str, Any]:
-    json_json_body = json_body.to_dict()
+    headers: Dict[str, Any] = {}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/branches/{branchId}".format(
             branchId=branch_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -55,7 +62,7 @@ def sync_detailed(
     branch_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Branch,
+    body: Branch,
 ) -> Response[Branch]:
     """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
     be updated. If you want to update other properties, you need to delete the old branch and create a
@@ -63,7 +70,7 @@ def sync_detailed(
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.
-        json_body (Branch): Branch places the note into the tree, it represents the relationship
+        body (Branch): Branch places the note into the tree, it represents the relationship
             between a parent note and child note
 
     Raises:
@@ -76,7 +83,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         branch_id=branch_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -90,7 +97,7 @@ def sync(
     branch_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Branch,
+    body: Branch,
 ) -> Optional[Branch]:
     """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
     be updated. If you want to update other properties, you need to delete the old branch and create a
@@ -98,7 +105,7 @@ def sync(
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.
-        json_body (Branch): Branch places the note into the tree, it represents the relationship
+        body (Branch): Branch places the note into the tree, it represents the relationship
             between a parent note and child note
 
     Raises:
@@ -112,7 +119,7 @@ def sync(
     return sync_detailed(
         branch_id=branch_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -120,7 +127,7 @@ async def asyncio_detailed(
     branch_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Branch,
+    body: Branch,
 ) -> Response[Branch]:
     """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
     be updated. If you want to update other properties, you need to delete the old branch and create a
@@ -128,7 +135,7 @@ async def asyncio_detailed(
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.
-        json_body (Branch): Branch places the note into the tree, it represents the relationship
+        body (Branch): Branch places the note into the tree, it represents the relationship
             between a parent note and child note
 
     Raises:
@@ -141,7 +148,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         branch_id=branch_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -153,7 +160,7 @@ async def asyncio(
     branch_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Branch,
+    body: Branch,
 ) -> Optional[Branch]:
     """patch a branch identified by the branchId with changes in the body. Only prefix and notePosition can
     be updated. If you want to update other properties, you need to delete the old branch and create a
@@ -161,7 +168,7 @@ async def asyncio(
 
     Args:
         branch_id (str):  Example: evnnmvHTCgIn.
-        json_body (Branch): Branch places the note into the tree, it represents the relationship
+        body (Branch): Branch places the note into the tree, it represents the relationship
             between a parent note and child note
 
     Raises:
@@ -176,6 +183,6 @@ async def asyncio(
         await asyncio_detailed(
             branch_id=branch_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

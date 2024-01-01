@@ -11,12 +11,14 @@ from ... import errors
 def _get_kwargs(
     attribute_id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/attributes/{attributeId}".format(
             attributeId=attribute_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

@@ -7,20 +7,22 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 import datetime
+from typing import Dict
 from ...models.note import Note
 
 
 def _get_kwargs(
     date: datetime.date,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/calendar/days/{date}".format(
             date=date,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

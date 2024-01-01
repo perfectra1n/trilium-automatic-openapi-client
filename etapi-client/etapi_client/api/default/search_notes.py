@@ -7,29 +7,29 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Dict
 from ...types import UNSET, Unset
-from ...models.search_notes_order_direction import SearchNotesOrderDirection
 from ...models.search_response import SearchResponse
+from typing import Dict
 from typing import Union
-from typing import Optional
+from ...models.search_notes_order_direction import SearchNotesOrderDirection
 
 
 def _get_kwargs(
     *,
     search: str,
-    fast_search: Union[Unset, None, bool] = False,
-    include_archived_notes: Union[Unset, None, bool] = False,
-    ancestor_note_id: Union[Unset, None, str] = UNSET,
-    ancestor_depth: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, str] = UNSET,
+    fast_search: Union[Unset, bool] = False,
+    include_archived_notes: Union[Unset, bool] = False,
+    ancestor_note_id: Union[Unset, str] = UNSET,
+    ancestor_depth: Union[Unset, str] = UNSET,
+    order_by: Union[Unset, str] = UNSET,
     order_direction: Union[
-        Unset, None, SearchNotesOrderDirection
+        Unset, SearchNotesOrderDirection
     ] = SearchNotesOrderDirection.ASC,
-    limit: Union[Unset, None, int] = UNSET,
-    debug: Union[Unset, None, bool] = False,
+    limit: Union[Unset, int] = UNSET,
+    debug: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
     params: Dict[str, Any] = {}
+
     params["search"] = search
 
     params["fastSearch"] = fast_search
@@ -42,9 +42,9 @@ def _get_kwargs(
 
     params["orderBy"] = order_by
 
-    json_order_direction: Union[Unset, None, str] = UNSET
+    json_order_direction: Union[Unset, str] = UNSET
     if not isinstance(order_direction, Unset):
-        json_order_direction = order_direction.value if order_direction else None
+        json_order_direction = order_direction.value
 
     params["orderDirection"] = json_order_direction
 
@@ -54,11 +54,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/notes",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -89,30 +91,30 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     search: str,
-    fast_search: Union[Unset, None, bool] = False,
-    include_archived_notes: Union[Unset, None, bool] = False,
-    ancestor_note_id: Union[Unset, None, str] = UNSET,
-    ancestor_depth: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, str] = UNSET,
+    fast_search: Union[Unset, bool] = False,
+    include_archived_notes: Union[Unset, bool] = False,
+    ancestor_note_id: Union[Unset, str] = UNSET,
+    ancestor_depth: Union[Unset, str] = UNSET,
+    order_by: Union[Unset, str] = UNSET,
     order_direction: Union[
-        Unset, None, SearchNotesOrderDirection
+        Unset, SearchNotesOrderDirection
     ] = SearchNotesOrderDirection.ASC,
-    limit: Union[Unset, None, int] = UNSET,
-    debug: Union[Unset, None, bool] = False,
+    limit: Union[Unset, int] = UNSET,
+    debug: Union[Unset, bool] = False,
 ) -> Response[SearchResponse]:
     """Search notes
 
     Args:
         search (str):
-        fast_search (Union[Unset, None, bool]):
-        include_archived_notes (Union[Unset, None, bool]):
-        ancestor_note_id (Union[Unset, None, str]):  Example: evnnmvHTCgIn.
-        ancestor_depth (Union[Unset, None, str]):
-        order_by (Union[Unset, None, str]):
-        order_direction (Union[Unset, None, SearchNotesOrderDirection]):  Default:
+        fast_search (Union[Unset, bool]):  Default: False.
+        include_archived_notes (Union[Unset, bool]):  Default: False.
+        ancestor_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        ancestor_depth (Union[Unset, str]):
+        order_by (Union[Unset, str]):
+        order_direction (Union[Unset, SearchNotesOrderDirection]):  Default:
             SearchNotesOrderDirection.ASC.
-        limit (Union[Unset, None, int]):
-        debug (Union[Unset, None, bool]):
+        limit (Union[Unset, int]):
+        debug (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -145,30 +147,30 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     search: str,
-    fast_search: Union[Unset, None, bool] = False,
-    include_archived_notes: Union[Unset, None, bool] = False,
-    ancestor_note_id: Union[Unset, None, str] = UNSET,
-    ancestor_depth: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, str] = UNSET,
+    fast_search: Union[Unset, bool] = False,
+    include_archived_notes: Union[Unset, bool] = False,
+    ancestor_note_id: Union[Unset, str] = UNSET,
+    ancestor_depth: Union[Unset, str] = UNSET,
+    order_by: Union[Unset, str] = UNSET,
     order_direction: Union[
-        Unset, None, SearchNotesOrderDirection
+        Unset, SearchNotesOrderDirection
     ] = SearchNotesOrderDirection.ASC,
-    limit: Union[Unset, None, int] = UNSET,
-    debug: Union[Unset, None, bool] = False,
+    limit: Union[Unset, int] = UNSET,
+    debug: Union[Unset, bool] = False,
 ) -> Optional[SearchResponse]:
     """Search notes
 
     Args:
         search (str):
-        fast_search (Union[Unset, None, bool]):
-        include_archived_notes (Union[Unset, None, bool]):
-        ancestor_note_id (Union[Unset, None, str]):  Example: evnnmvHTCgIn.
-        ancestor_depth (Union[Unset, None, str]):
-        order_by (Union[Unset, None, str]):
-        order_direction (Union[Unset, None, SearchNotesOrderDirection]):  Default:
+        fast_search (Union[Unset, bool]):  Default: False.
+        include_archived_notes (Union[Unset, bool]):  Default: False.
+        ancestor_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        ancestor_depth (Union[Unset, str]):
+        order_by (Union[Unset, str]):
+        order_direction (Union[Unset, SearchNotesOrderDirection]):  Default:
             SearchNotesOrderDirection.ASC.
-        limit (Union[Unset, None, int]):
-        debug (Union[Unset, None, bool]):
+        limit (Union[Unset, int]):
+        debug (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -196,30 +198,30 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     search: str,
-    fast_search: Union[Unset, None, bool] = False,
-    include_archived_notes: Union[Unset, None, bool] = False,
-    ancestor_note_id: Union[Unset, None, str] = UNSET,
-    ancestor_depth: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, str] = UNSET,
+    fast_search: Union[Unset, bool] = False,
+    include_archived_notes: Union[Unset, bool] = False,
+    ancestor_note_id: Union[Unset, str] = UNSET,
+    ancestor_depth: Union[Unset, str] = UNSET,
+    order_by: Union[Unset, str] = UNSET,
     order_direction: Union[
-        Unset, None, SearchNotesOrderDirection
+        Unset, SearchNotesOrderDirection
     ] = SearchNotesOrderDirection.ASC,
-    limit: Union[Unset, None, int] = UNSET,
-    debug: Union[Unset, None, bool] = False,
+    limit: Union[Unset, int] = UNSET,
+    debug: Union[Unset, bool] = False,
 ) -> Response[SearchResponse]:
     """Search notes
 
     Args:
         search (str):
-        fast_search (Union[Unset, None, bool]):
-        include_archived_notes (Union[Unset, None, bool]):
-        ancestor_note_id (Union[Unset, None, str]):  Example: evnnmvHTCgIn.
-        ancestor_depth (Union[Unset, None, str]):
-        order_by (Union[Unset, None, str]):
-        order_direction (Union[Unset, None, SearchNotesOrderDirection]):  Default:
+        fast_search (Union[Unset, bool]):  Default: False.
+        include_archived_notes (Union[Unset, bool]):  Default: False.
+        ancestor_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        ancestor_depth (Union[Unset, str]):
+        order_by (Union[Unset, str]):
+        order_direction (Union[Unset, SearchNotesOrderDirection]):  Default:
             SearchNotesOrderDirection.ASC.
-        limit (Union[Unset, None, int]):
-        debug (Union[Unset, None, bool]):
+        limit (Union[Unset, int]):
+        debug (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -250,30 +252,30 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     search: str,
-    fast_search: Union[Unset, None, bool] = False,
-    include_archived_notes: Union[Unset, None, bool] = False,
-    ancestor_note_id: Union[Unset, None, str] = UNSET,
-    ancestor_depth: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, str] = UNSET,
+    fast_search: Union[Unset, bool] = False,
+    include_archived_notes: Union[Unset, bool] = False,
+    ancestor_note_id: Union[Unset, str] = UNSET,
+    ancestor_depth: Union[Unset, str] = UNSET,
+    order_by: Union[Unset, str] = UNSET,
     order_direction: Union[
-        Unset, None, SearchNotesOrderDirection
+        Unset, SearchNotesOrderDirection
     ] = SearchNotesOrderDirection.ASC,
-    limit: Union[Unset, None, int] = UNSET,
-    debug: Union[Unset, None, bool] = False,
+    limit: Union[Unset, int] = UNSET,
+    debug: Union[Unset, bool] = False,
 ) -> Optional[SearchResponse]:
     """Search notes
 
     Args:
         search (str):
-        fast_search (Union[Unset, None, bool]):
-        include_archived_notes (Union[Unset, None, bool]):
-        ancestor_note_id (Union[Unset, None, str]):  Example: evnnmvHTCgIn.
-        ancestor_depth (Union[Unset, None, str]):
-        order_by (Union[Unset, None, str]):
-        order_direction (Union[Unset, None, SearchNotesOrderDirection]):  Default:
+        fast_search (Union[Unset, bool]):  Default: False.
+        include_archived_notes (Union[Unset, bool]):  Default: False.
+        ancestor_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        ancestor_depth (Union[Unset, str]):
+        order_by (Union[Unset, str]):
+        order_direction (Union[Unset, SearchNotesOrderDirection]):  Default:
             SearchNotesOrderDirection.ASC.
-        limit (Union[Unset, None, int]):
-        debug (Union[Unset, None, bool]):
+        limit (Union[Unset, int]):
+        debug (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

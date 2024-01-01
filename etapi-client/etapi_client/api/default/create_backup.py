@@ -11,12 +11,14 @@ from ... import errors
 def _get_kwargs(
     backup_name: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "put",
         "url": "/backup/{backupName}".format(
             backupName=backup_name,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

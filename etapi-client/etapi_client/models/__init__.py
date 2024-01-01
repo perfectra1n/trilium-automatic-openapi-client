@@ -9,7 +9,7 @@ from .create_note_def_type import CreateNoteDefType
 from .create_revision_format import CreateRevisionFormat
 from .error import Error
 from .export_note_subtree_format import ExportNoteSubtreeFormat
-from .login_json_body import LoginJsonBody
+from .login_body import LoginBody
 from .login_response_201 import LoginResponse201
 from .note import Note
 from .note_type import NoteType
@@ -28,7 +28,7 @@ __all__ = (
     "CreateRevisionFormat",
     "Error",
     "ExportNoteSubtreeFormat",
-    "LoginJsonBody",
+    "LoginBody",
     "LoginResponse201",
     "Note",
     "NoteType",

@@ -14,12 +14,14 @@ from typing import Dict
 def _get_kwargs(
     year: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/calendar/years/{year}".format(
             year=year,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

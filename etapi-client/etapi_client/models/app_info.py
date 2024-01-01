@@ -8,10 +8,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from dateutil.parser import isoparse
 import datetime
-from ..types import UNSET, Unset
 from typing import Union
+from ..types import UNSET, Unset
+from dateutil.parser import isoparse
 
 
 T = TypeVar("T", bound="AppInfo")
@@ -44,15 +44,21 @@ class AppInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         app_version = self.app_version
+
         db_version = self.db_version
+
         sync_version = self.sync_version
+
         build_date: Union[Unset, str] = UNSET
         if not isinstance(self.build_date, Unset):
             build_date = self.build_date.isoformat()
 
         build_revision = self.build_revision
+
         data_directory = self.data_directory
+
         clipper_protocol_version = self.clipper_protocol_version
+
         utc_date_time = self.utc_date_time
 
         field_dict: Dict[str, Any] = {}

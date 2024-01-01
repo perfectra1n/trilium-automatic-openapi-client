@@ -7,24 +7,31 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 from ...models.attribute import Attribute
+from typing import Dict
 
 
 def _get_kwargs(
     attribute_id: str,
     *,
-    json_body: Attribute,
+    body: Attribute,
 ) -> Dict[str, Any]:
-    json_json_body = json_body.to_dict()
+    headers: Dict[str, Any] = {}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/attributes/{attributeId}".format(
             attributeId=attribute_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -55,7 +62,7 @@ def sync_detailed(
     attribute_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Attribute,
+    body: Attribute,
 ) -> Response[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
@@ -63,8 +70,7 @@ def sync_detailed(
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
+        body (Attribute): Attribute (Label, Relation) is a key-value record attached to a note.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -76,7 +82,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         attribute_id=attribute_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -90,7 +96,7 @@ def sync(
     attribute_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Attribute,
+    body: Attribute,
 ) -> Optional[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
@@ -98,8 +104,7 @@ def sync(
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
+        body (Attribute): Attribute (Label, Relation) is a key-value record attached to a note.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -112,7 +117,7 @@ def sync(
     return sync_detailed(
         attribute_id=attribute_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -120,7 +125,7 @@ async def asyncio_detailed(
     attribute_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Attribute,
+    body: Attribute,
 ) -> Response[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
@@ -128,8 +133,7 @@ async def asyncio_detailed(
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
+        body (Attribute): Attribute (Label, Relation) is a key-value record attached to a note.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -141,7 +145,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         attribute_id=attribute_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -153,7 +157,7 @@ async def asyncio(
     attribute_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: Attribute,
+    body: Attribute,
 ) -> Optional[Attribute]:
     """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
     position can be updated. For relations, only position can be updated. If you want to modify other
@@ -161,8 +165,7 @@ async def asyncio(
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
-        json_body (Attribute): Attribute (Label, Relation) is a key-value record attached to a
-            note.
+        body (Attribute): Attribute (Label, Relation) is a key-value record attached to a note.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -176,6 +179,6 @@ async def asyncio(
         await asyncio_detailed(
             attribute_id=attribute_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

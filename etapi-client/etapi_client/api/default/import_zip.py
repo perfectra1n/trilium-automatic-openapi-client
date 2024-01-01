@@ -14,12 +14,14 @@ from typing import Dict
 def _get_kwargs(
     note_id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/notes/{noteId}/import".format(
             noteId=note_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

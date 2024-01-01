@@ -11,12 +11,14 @@ from ... import errors
 def _get_kwargs(
     parent_note_id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/refresh-note-ordering/{parentNoteId}".format(
             parentNoteId=parent_note_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

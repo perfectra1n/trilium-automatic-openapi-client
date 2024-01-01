@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Dict
-from typing import cast
-from ..types import UNSET, Unset
 from ..models.note_type import NoteType
-from typing import Union
+from typing import cast
+from typing import Dict
 from typing import cast, List
+from typing import Union
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.attribute import Attribute
@@ -62,14 +62,19 @@ class Note:
 
     def to_dict(self) -> Dict[str, Any]:
         note_id = self.note_id
+
         title = self.title
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         mime = self.mime
+
         is_protected = self.is_protected
+
         blob_id = self.blob_id
+
         attributes: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = []
@@ -77,7 +82,6 @@ class Note:
                 componentsschemas_attribute_list_item = (
                     componentsschemas_attribute_list_item_data.to_dict()
                 )
-
                 attributes.append(componentsschemas_attribute_list_item)
 
         parent_note_ids: Union[Unset, List[str]] = UNSET
@@ -97,8 +101,11 @@ class Note:
             child_branch_ids = self.child_branch_ids
 
         date_created = self.date_created
+
         date_modified = self.date_modified
+
         utc_date_created = self.utc_date_created
+
         utc_date_modified = self.utc_date_modified
 
         field_dict: Dict[str, Any] = {}

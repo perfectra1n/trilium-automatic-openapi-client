@@ -9,10 +9,12 @@ from ... import errors
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/auth/logout",
     }
+
+    return _kwargs
 
 
 def _parse_response(

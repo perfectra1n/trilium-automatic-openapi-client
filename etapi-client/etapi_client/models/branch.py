@@ -8,8 +8,8 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from typing import Union
+from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="Branch")
@@ -40,11 +40,17 @@ class Branch:
 
     def to_dict(self) -> Dict[str, Any]:
         branch_id = self.branch_id
+
         note_id = self.note_id
+
         parent_note_id = self.parent_note_id
+
         prefix = self.prefix
+
         note_position = self.note_position
+
         is_expanded = self.is_expanded
+
         utc_date_modified = self.utc_date_modified
 
         field_dict: Dict[str, Any] = {}

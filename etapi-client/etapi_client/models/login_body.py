@@ -8,15 +8,15 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from typing import Union
+from ..types import UNSET, Unset
 
 
-T = TypeVar("T", bound="LoginJsonBody")
+T = TypeVar("T", bound="LoginBody")
 
 
 @_attrs_define
-class LoginJsonBody:
+class LoginBody:
     """
     Attributes:
         password (Union[Unset, str]): user's password used to e.g. login to Trilium server and/or protect notes
@@ -41,12 +41,12 @@ class LoginJsonBody:
         d = src_dict.copy()
         password = d.pop("password", UNSET)
 
-        login_json_body = cls(
+        login_body = cls(
             password=password,
         )
 
-        login_json_body.additional_properties = d
-        return login_json_body
+        login_body.additional_properties = d
+        return login_body
 
     @property
     def additional_keys(self) -> List[str]:
