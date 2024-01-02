@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.create_note_def_type import CreateNoteDefType
 from ..types import UNSET, Unset
+from typing import Union
 
 
 T = TypeVar("T", bound="CreateNoteDef")
