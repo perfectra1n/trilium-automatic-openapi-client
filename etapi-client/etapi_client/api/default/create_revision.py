@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Union
 from ...models.create_revision_format import CreateRevisionFormat
 from ...types import UNSET, Unset
+from typing import Union
 
 
 def _get_kwargs(
