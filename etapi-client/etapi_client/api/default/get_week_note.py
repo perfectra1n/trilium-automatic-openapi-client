@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-import datetime
 from typing import Dict
 from ...models.note import Note
+import datetime
 
 
 def _get_kwargs(
