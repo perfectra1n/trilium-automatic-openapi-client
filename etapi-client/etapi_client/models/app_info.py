@@ -10,8 +10,8 @@ from ..types import UNSET, Unset
 
 from dateutil.parser import isoparse
 from ..types import UNSET, Unset
-from typing import Union
 import datetime
+from typing import Union
 
 
 T = TypeVar("T", bound="AppInfo")

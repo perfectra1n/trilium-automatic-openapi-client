@@ -7,31 +7,38 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.note import Note
-import datetime
 from typing import Dict
+from ...models.create_attachment import CreateAttachment
+from ...models.attachment import Attachment
 
 
 def _get_kwargs(
-    date: datetime.date,
+    *,
+    body: CreateAttachment,
 ) -> Dict[str, Any]:
+    headers: Dict[str, Any] = {}
+
     _kwargs: Dict[str, Any] = {
-        "method": "get",
-        "url": "/calendar/days/{date}".format(
-            date=date,
-        ),
+        "method": "post",
+        "url": "/attachments",
     }
 
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
     return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Note]:
-    if response.status_code == HTTPStatus.OK:
-        response_200 = Note.from_dict(response.json())
+) -> Optional[Attachment]:
+    if response.status_code == HTTPStatus.CREATED:
+        response_201 = Attachment.from_dict(response.json())
 
-        return response_200
+        return response_201
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -40,7 +47,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Note]:
+) -> Response[Attachment]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -50,25 +57,25 @@ def _build_response(
 
 
 def sync_detailed(
-    date: datetime.date,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: CreateAttachment,
+) -> Response[Attachment]:
+    """create an attachment
 
     Args:
-        date (datetime.date):
+        body (CreateAttachment):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Attachment]
     """
 
     kwargs = _get_kwargs(
-        date=date,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -79,49 +86,49 @@ def sync_detailed(
 
 
 def sync(
-    date: datetime.date,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: CreateAttachment,
+) -> Optional[Attachment]:
+    """create an attachment
 
     Args:
-        date (datetime.date):
+        body (CreateAttachment):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Note
+        Attachment
     """
 
     return sync_detailed(
-        date=date,
         client=client,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
-    date: datetime.date,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: CreateAttachment,
+) -> Response[Attachment]:
+    """create an attachment
 
     Args:
-        date (datetime.date):
+        body (CreateAttachment):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Attachment]
     """
 
     kwargs = _get_kwargs(
-        date=date,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -130,26 +137,26 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    date: datetime.date,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: CreateAttachment,
+) -> Optional[Attachment]:
+    """create an attachment
 
     Args:
-        date (datetime.date):
+        body (CreateAttachment):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Note
+        Attachment
     """
 
     return (
         await asyncio_detailed(
-            date=date,
             client=client,
+            body=body,
         )
     ).parsed

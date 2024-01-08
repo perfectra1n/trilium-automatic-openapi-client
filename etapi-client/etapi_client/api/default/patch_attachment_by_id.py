@@ -7,29 +7,38 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.note import Note
-import datetime
+from ...models.attachment import Attachment
 from typing import Dict
 
 
 def _get_kwargs(
-    date: datetime.date,
+    attachment_id: str,
+    *,
+    body: Attachment,
 ) -> Dict[str, Any]:
+    headers: Dict[str, Any] = {}
+
     _kwargs: Dict[str, Any] = {
-        "method": "get",
-        "url": "/calendar/days/{date}".format(
-            date=date,
+        "method": "patch",
+        "url": "/attachments/{attachmentId}".format(
+            attachmentId=attachment_id,
         ),
     }
 
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
     return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Note]:
+) -> Optional[Attachment]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = Note.from_dict(response.json())
+        response_200 = Attachment.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -40,7 +49,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Note]:
+) -> Response[Attachment]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -50,25 +59,29 @@ def _build_response(
 
 
 def sync_detailed(
-    date: datetime.date,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: Attachment,
+) -> Response[Attachment]:
+    """patch an attachment identified by the attachmentId with changes in the body. Only role, mime, title,
+    and position are patchable.
 
     Args:
-        date (datetime.date):
+        attachment_id (str):  Example: evnnmvHTCgIn.
+        body (Attachment): Attachment is owned by a note, has title and content
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Attachment]
     """
 
     kwargs = _get_kwargs(
-        date=date,
+        attachment_id=attachment_id,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -79,49 +92,57 @@ def sync_detailed(
 
 
 def sync(
-    date: datetime.date,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: Attachment,
+) -> Optional[Attachment]:
+    """patch an attachment identified by the attachmentId with changes in the body. Only role, mime, title,
+    and position are patchable.
 
     Args:
-        date (datetime.date):
+        attachment_id (str):  Example: evnnmvHTCgIn.
+        body (Attachment): Attachment is owned by a note, has title and content
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Note
+        Attachment
     """
 
     return sync_detailed(
-        date=date,
+        attachment_id=attachment_id,
         client=client,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
-    date: datetime.date,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: Attachment,
+) -> Response[Attachment]:
+    """patch an attachment identified by the attachmentId with changes in the body. Only role, mime, title,
+    and position are patchable.
 
     Args:
-        date (datetime.date):
+        attachment_id (str):  Example: evnnmvHTCgIn.
+        body (Attachment): Attachment is owned by a note, has title and content
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Note]
+        Response[Attachment]
     """
 
     kwargs = _get_kwargs(
-        date=date,
+        attachment_id=attachment_id,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -130,26 +151,30 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    date: datetime.date,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Note]:
-    """returns a day note for a given date. Gets created if doesn't exist.
+    body: Attachment,
+) -> Optional[Attachment]:
+    """patch an attachment identified by the attachmentId with changes in the body. Only role, mime, title,
+    and position are patchable.
 
     Args:
-        date (datetime.date):
+        attachment_id (str):  Example: evnnmvHTCgIn.
+        body (Attachment): Attachment is owned by a note, has title and content
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Note
+        Attachment
     """
 
     return (
         await asyncio_detailed(
-            date=date,
+            attachment_id=attachment_id,
             client=client,
+            body=body,
         )
     ).parsed

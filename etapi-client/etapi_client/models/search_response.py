@@ -14,8 +14,8 @@ from typing import Dict
 from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.search_response_debug_info import SearchResponseDebugInfo
     from ..models.note import Note
+    from ..models.search_response_debug_info import SearchResponseDebugInfo
 
 
 T = TypeVar("T", bound="SearchResponse")
@@ -58,8 +58,8 @@ class SearchResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.search_response_debug_info import SearchResponseDebugInfo
         from ..models.note import Note
+        from ..models.search_response_debug_info import SearchResponseDebugInfo
 
         d = src_dict.copy()
         results = []

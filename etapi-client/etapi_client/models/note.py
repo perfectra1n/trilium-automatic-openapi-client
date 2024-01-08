@@ -12,8 +12,8 @@ from typing import cast, List
 from typing import cast
 from ..types import UNSET, Unset
 from typing import Dict
-from ..models.note_type import NoteType
 from typing import Union
+from ..models.note_type import NoteType
 
 if TYPE_CHECKING:
     from ..models.attribute import Attribute

@@ -4,35 +4,18 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
+from ...types import Response
 from ... import errors
-
-from typing import Union
-from ...types import UNSET, Unset
-from ...models.create_revision_format import CreateRevisionFormat
 
 
 def _get_kwargs(
-    note_id: str,
-    *,
-    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
+    attachment_id: str,
 ) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
-
-    json_format_: Union[Unset, str] = UNSET
-    if not isinstance(format_, Unset):
-        json_format_ = format_.value
-
-    params["format"] = json_format_
-
-    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
     _kwargs: Dict[str, Any] = {
-        "method": "post",
-        "url": "/notes/{noteId}/revision".format(
-            noteId=note_id,
+        "method": "delete",
+        "url": "/attachments/{attachmentId}".format(
+            attachmentId=attachment_id,
         ),
-        "params": params,
     }
 
     return _kwargs
@@ -61,16 +44,14 @@ def _build_response(
 
 
 def sync_detailed(
-    note_id: str,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
-    """Create a note revision for the given note
+    """deletes an attachment based on the attachmentId supplied.
 
     Args:
-        note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
+        attachment_id (str):  Example: evnnmvHTCgIn.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -81,8 +62,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        note_id=note_id,
-        format_=format_,
+        attachment_id=attachment_id,
     )
 
     response = client.get_httpx_client().request(
@@ -93,16 +73,14 @@ def sync_detailed(
 
 
 async def asyncio_detailed(
-    note_id: str,
+    attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    format_: Union[Unset, CreateRevisionFormat] = CreateRevisionFormat.HTML,
 ) -> Response[Any]:
-    """Create a note revision for the given note
+    """deletes an attachment based on the attachmentId supplied.
 
     Args:
-        note_id (str):  Example: evnnmvHTCgIn.
-        format_ (Union[Unset, CreateRevisionFormat]):  Default: CreateRevisionFormat.HTML.
+        attachment_id (str):  Example: evnnmvHTCgIn.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -113,8 +91,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        note_id=note_id,
-        format_=format_,
+        attachment_id=attachment_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

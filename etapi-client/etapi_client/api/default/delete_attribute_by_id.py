@@ -48,7 +48,7 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """deletes a attribute based on the attributeId supplied.
+    """deletes an attribute based on the attributeId supplied.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
@@ -77,7 +77,7 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """deletes a attribute based on the attributeId supplied.
+    """deletes an attribute based on the attributeId supplied.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.

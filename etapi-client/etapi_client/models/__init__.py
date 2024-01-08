@@ -1,9 +1,11 @@
 """ Contains all the data models used in inputs/outputs """
 
 from .app_info import AppInfo
+from .attachment import Attachment
 from .attribute import Attribute
 from .attribute_type import AttributeType
 from .branch import Branch
+from .create_attachment import CreateAttachment
 from .create_note_def import CreateNoteDef
 from .create_note_def_type import CreateNoteDefType
 from .create_revision_format import CreateRevisionFormat
@@ -20,9 +22,11 @@ from .search_response_debug_info import SearchResponseDebugInfo
 
 __all__ = (
     "AppInfo",
+    "Attachment",
     "Attribute",
     "AttributeType",
     "Branch",
+    "CreateAttachment",
     "CreateNoteDef",
     "CreateNoteDefType",
     "CreateRevisionFormat",

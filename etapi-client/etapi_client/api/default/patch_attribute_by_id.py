@@ -64,9 +64,9 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     body: Attribute,
 ) -> Response[Attribute]:
-    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
-    position can be updated. For relations, only position can be updated. If you want to modify other
-    properties, you need to delete the old attribute and create a new one.
+    """patch an attribute identified by the attributeId with changes in the body. For labels, only value
+    and position can be updated. For relations, only position can be updated. If you want to modify
+    other properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
@@ -98,9 +98,9 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     body: Attribute,
 ) -> Optional[Attribute]:
-    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
-    position can be updated. For relations, only position can be updated. If you want to modify other
-    properties, you need to delete the old attribute and create a new one.
+    """patch an attribute identified by the attributeId with changes in the body. For labels, only value
+    and position can be updated. For relations, only position can be updated. If you want to modify
+    other properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
@@ -127,9 +127,9 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     body: Attribute,
 ) -> Response[Attribute]:
-    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
-    position can be updated. For relations, only position can be updated. If you want to modify other
-    properties, you need to delete the old attribute and create a new one.
+    """patch an attribute identified by the attributeId with changes in the body. For labels, only value
+    and position can be updated. For relations, only position can be updated. If you want to modify
+    other properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
@@ -159,9 +159,9 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     body: Attribute,
 ) -> Optional[Attribute]:
-    """patch a attribute identified by the attributeId with changes in the body. For labels, only value and
-    position can be updated. For relations, only position can be updated. If you want to modify other
-    properties, you need to delete the old attribute and create a new one.
+    """patch an attribute identified by the attributeId with changes in the body. For labels, only value
+    and position can be updated. For relations, only position can be updated. If you want to modify
+    other properties, you need to delete the old attribute and create a new one.
 
     Args:
         attribute_id (str):  Example: evnnmvHTCgIn.
