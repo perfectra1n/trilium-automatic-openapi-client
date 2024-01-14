@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.attachment import Attachment
-from ...models.create_attachment import CreateAttachment
 from typing import Dict
+from ...models.create_attachment import CreateAttachment
+from ...models.attachment import Attachment
 
 
 def _get_kwargs(

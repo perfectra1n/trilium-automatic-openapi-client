@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.login_body import LoginBody
-from ...models.login_response_201 import LoginResponse201
-from typing import cast
 from typing import Dict
+from typing import cast
+from ...models.login_response_201 import LoginResponse201
+from ...models.login_body import LoginBody
 
 
 def _get_kwargs(
