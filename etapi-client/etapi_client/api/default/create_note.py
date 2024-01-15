@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.create_note_def import CreateNoteDef
 from ...models.note_with_branch import NoteWithBranch
+from ...models.create_note_def import CreateNoteDef
 
 
 def _get_kwargs(
