@@ -9,9 +9,9 @@ from ... import errors
 
 from ...types import UNSET, Unset
 from typing import Dict
-from typing import Union
 from ...models.search_notes_order_direction import SearchNotesOrderDirection
 from ...models.search_response import SearchResponse
+from typing import Union
 
 
 def _get_kwargs(
