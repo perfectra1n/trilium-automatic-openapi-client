@@ -8,9 +8,9 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.login_body import LoginBody
 from ...models.login_response_201 import LoginResponse201
 from typing import cast
+from ...models.login_body import LoginBody
 
 
 def _get_kwargs(

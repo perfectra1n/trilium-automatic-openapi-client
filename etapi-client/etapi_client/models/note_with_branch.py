@@ -9,12 +9,12 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import Dict
-from ..types import UNSET, Unset
 from typing import Union
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.branch import Branch
     from ..models.note import Note
+    from ..models.branch import Branch
 
 
 T = TypeVar("T", bound="NoteWithBranch")
@@ -54,8 +54,8 @@ class NoteWithBranch:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.branch import Branch
         from ..models.note import Note
+        from ..models.branch import Branch
 
         d = src_dict.copy()
         _note = d.pop("note", UNSET)
