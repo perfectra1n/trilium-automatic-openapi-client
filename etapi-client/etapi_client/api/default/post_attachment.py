@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from ...models.create_attachment import CreateAttachment
-from ...models.attachment import Attachment
 from typing import Dict
+from ...models.attachment import Attachment
 
 
 def _get_kwargs(
