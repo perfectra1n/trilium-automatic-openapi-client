@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.note import Note
 import datetime
+from ...models.note import Note
 from typing import Dict
 
 
