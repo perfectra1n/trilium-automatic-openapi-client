@@ -7,7 +7,6 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 from ...models.note_with_branch import NoteWithBranch
 from ...models.create_note_def import CreateNoteDef
 

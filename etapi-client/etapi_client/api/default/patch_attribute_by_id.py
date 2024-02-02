@@ -8,7 +8,6 @@ from ...types import Response
 from ... import errors
 
 from ...models.attribute import Attribute
-from typing import Dict
 
 
 def _get_kwargs(

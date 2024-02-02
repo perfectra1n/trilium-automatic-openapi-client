@@ -7,8 +7,7 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...types import UNSET, Unset
-from typing import Union
+from ...types import Unset
 from ...models.create_revision_format import CreateRevisionFormat
 
 
