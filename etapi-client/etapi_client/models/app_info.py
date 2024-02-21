@@ -9,8 +9,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from dateutil.parser import isoparse
-from typing import Union
 import datetime
+from typing import Union
 
 
 T = TypeVar("T", bound="AppInfo")
