@@ -19,8 +19,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/attachments/{attachmentId}".format(
-            attachmentId=attachment_id,
+        "url": "/attachments/{attachment_id}".format(
+            attachment_id=attachment_id,
         ),
     }
 

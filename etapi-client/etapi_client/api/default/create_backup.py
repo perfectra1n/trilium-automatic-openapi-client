@@ -13,8 +13,8 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "put",
-        "url": "/backup/{backupName}".format(
-            backupName=backup_name,
+        "url": "/backup/{backup_name}".format(
+            backup_name=backup_name,
         ),
     }
 

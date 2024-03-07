@@ -1,4 +1,5 @@
-""" A client library for accessing ETAPI """
+"""A client library for accessing ETAPI"""
+
 from .client import AuthenticatedClient, Client
 
 __all__ = (

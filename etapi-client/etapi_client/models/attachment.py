@@ -90,9 +90,9 @@ class Attachment:
         if utc_date_modified is not UNSET:
             field_dict["utcDateModified"] = utc_date_modified
         if utc_date_scheduled_for_erasure_since is not UNSET:
-            field_dict[
-                "utcDateScheduledForErasureSince"
-            ] = utc_date_scheduled_for_erasure_since
+            field_dict["utcDateScheduledForErasureSince"] = (
+                utc_date_scheduled_for_erasure_since
+            )
         if content_length is not UNSET:
             field_dict["contentLength"] = content_length
 

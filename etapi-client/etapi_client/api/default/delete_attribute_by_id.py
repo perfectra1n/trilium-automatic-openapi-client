@@ -13,8 +13,8 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/attributes/{attributeId}".format(
-            attributeId=attribute_id,
+        "url": "/attributes/{attribute_id}".format(
+            attribute_id=attribute_id,
         ),
     }
 

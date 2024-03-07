@@ -13,8 +13,8 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/notes/{noteId}/content".format(
-            noteId=note_id,
+        "url": "/notes/{note_id}/content".format(
+            note_id=note_id,
         ),
     }
 
