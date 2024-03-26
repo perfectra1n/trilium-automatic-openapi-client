@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.search_response import SearchResponse
 from ...types import Unset
+from ...models.search_response import SearchResponse
 from ...models.search_notes_order_direction import SearchNotesOrderDirection
 
 
