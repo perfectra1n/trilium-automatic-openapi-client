@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.login_response_201 import LoginResponse201
 from ...models.login_body import LoginBody
+from ...models.login_response_201 import LoginResponse201
 
 
 def _get_kwargs(
