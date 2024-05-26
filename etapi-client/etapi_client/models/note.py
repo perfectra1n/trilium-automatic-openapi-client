@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.note_type import NoteType
 from typing import Union
 from typing import cast
+from ..models.note_type import NoteType
 
 if TYPE_CHECKING:
     from ..models.attribute import Attribute
