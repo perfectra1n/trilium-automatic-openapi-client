@@ -1,15 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-
 
 T = TypeVar("T", bound="Branch")
 
@@ -20,8 +14,8 @@ class Branch:
 
     Attributes:
         branch_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
-        note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
-        parent_note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        note_id (Union[Unset, Any]): identifies the child note
+        parent_note_id (Union[Unset, Any]): identifies the parent note
         prefix (Union[Unset, str]):
         note_position (Union[Unset, int]):
         is_expanded (Union[Unset, bool]):
@@ -29,8 +23,8 @@ class Branch:
     """
 
     branch_id: Union[Unset, str] = UNSET
-    note_id: Union[Unset, str] = UNSET
-    parent_note_id: Union[Unset, str] = UNSET
+    note_id: Union[Unset, Any] = UNSET
+    parent_note_id: Union[Unset, Any] = UNSET
     prefix: Union[Unset, str] = UNSET
     note_position: Union[Unset, int] = UNSET
     is_expanded: Union[Unset, bool] = UNSET

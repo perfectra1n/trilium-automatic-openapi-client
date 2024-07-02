@@ -3,13 +3,11 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import Unset
+from ...client import AuthenticatedClient, Client
 from ...models.search_notes_order_direction import SearchNotesOrderDirection
 from ...models.search_response import SearchResponse
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -20,9 +18,7 @@ def _get_kwargs(
     ancestor_note_id: Union[Unset, str] = UNSET,
     ancestor_depth: Union[Unset, str] = UNSET,
     order_by: Union[Unset, str] = UNSET,
-    order_direction: Union[
-        Unset, SearchNotesOrderDirection
-    ] = SearchNotesOrderDirection.ASC,
+    order_direction: Union[Unset, SearchNotesOrderDirection] = SearchNotesOrderDirection.ASC,
     limit: Union[Unset, int] = UNSET,
     debug: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
@@ -94,9 +90,7 @@ def sync_detailed(
     ancestor_note_id: Union[Unset, str] = UNSET,
     ancestor_depth: Union[Unset, str] = UNSET,
     order_by: Union[Unset, str] = UNSET,
-    order_direction: Union[
-        Unset, SearchNotesOrderDirection
-    ] = SearchNotesOrderDirection.ASC,
+    order_direction: Union[Unset, SearchNotesOrderDirection] = SearchNotesOrderDirection.ASC,
     limit: Union[Unset, int] = UNSET,
     debug: Union[Unset, bool] = False,
 ) -> Response[SearchResponse]:
@@ -150,9 +144,7 @@ def sync(
     ancestor_note_id: Union[Unset, str] = UNSET,
     ancestor_depth: Union[Unset, str] = UNSET,
     order_by: Union[Unset, str] = UNSET,
-    order_direction: Union[
-        Unset, SearchNotesOrderDirection
-    ] = SearchNotesOrderDirection.ASC,
+    order_direction: Union[Unset, SearchNotesOrderDirection] = SearchNotesOrderDirection.ASC,
     limit: Union[Unset, int] = UNSET,
     debug: Union[Unset, bool] = False,
 ) -> Optional[SearchResponse]:
@@ -201,9 +193,7 @@ async def asyncio_detailed(
     ancestor_note_id: Union[Unset, str] = UNSET,
     ancestor_depth: Union[Unset, str] = UNSET,
     order_by: Union[Unset, str] = UNSET,
-    order_direction: Union[
-        Unset, SearchNotesOrderDirection
-    ] = SearchNotesOrderDirection.ASC,
+    order_direction: Union[Unset, SearchNotesOrderDirection] = SearchNotesOrderDirection.ASC,
     limit: Union[Unset, int] = UNSET,
     debug: Union[Unset, bool] = False,
 ) -> Response[SearchResponse]:
@@ -255,9 +245,7 @@ async def asyncio(
     ancestor_note_id: Union[Unset, str] = UNSET,
     ancestor_depth: Union[Unset, str] = UNSET,
     order_by: Union[Unset, str] = UNSET,
-    order_direction: Union[
-        Unset, SearchNotesOrderDirection
-    ] = SearchNotesOrderDirection.ASC,
+    order_direction: Union[Unset, SearchNotesOrderDirection] = SearchNotesOrderDirection.ASC,
     limit: Union[Unset, int] = UNSET,
     debug: Union[Unset, bool] = False,
 ) -> Optional[SearchResponse]:

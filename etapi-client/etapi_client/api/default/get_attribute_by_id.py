@@ -3,11 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.attribute import Attribute
+from ...types import Response
 
 
 def _get_kwargs(
@@ -15,17 +14,13 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/attributes/{attribute_id}".format(
-            attribute_id=attribute_id,
-        ),
+        "url": f"/attributes/{attribute_id}",
     }
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Attribute]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Attribute]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Attribute.from_dict(response.json())
 
@@ -36,9 +31,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Attribute]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Attribute]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

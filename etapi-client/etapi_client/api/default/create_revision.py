@@ -3,12 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import Unset
+from ...client import AuthenticatedClient, Client
 from ...models.create_revision_format import CreateRevisionFormat
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -28,18 +26,14 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/notes/{note_id}/revision".format(
-            note_id=note_id,
-        ),
+        "url": f"/notes/{note_id}/revision",
         "params": params,
     }
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Any]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if client.raise_on_unexpected_status:
@@ -48,9 +42,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Any]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

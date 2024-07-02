@@ -3,11 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.attachment import Attachment
+from ...types import Response
 
 
 def _get_kwargs(
@@ -19,9 +18,7 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/attachments/{attachment_id}".format(
-            attachment_id=attachment_id,
-        ),
+        "url": f"/attachments/{attachment_id}",
     }
 
     _body = body.to_dict()
@@ -33,9 +30,7 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Attachment]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Attachment]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Attachment.from_dict(response.json())
 
@@ -46,9 +41,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Attachment]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Attachment]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

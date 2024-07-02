@@ -3,12 +3,11 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.create_note_def import CreateNoteDef
 from ...models.note_with_branch import NoteWithBranch
+from ...types import Response
 
 
 def _get_kwargs(

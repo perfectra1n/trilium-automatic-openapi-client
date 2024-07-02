@@ -1,16 +1,10 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.attribute_type import AttributeType
-from typing import Union
-
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Attribute")
 
@@ -21,7 +15,7 @@ class Attribute:
 
     Attributes:
         attribute_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
-        note_id (Union[Unset, str]):  Example: evnnmvHTCgIn.
+        note_id (Union[Unset, Any]): identifies the child note
         type (Union[Unset, AttributeType]):
         name (Union[Unset, str]):  Example: shareCss.
         value (Union[Unset, str]):
@@ -31,7 +25,7 @@ class Attribute:
     """
 
     attribute_id: Union[Unset, str] = UNSET
-    note_id: Union[Unset, str] = UNSET
+    note_id: Union[Unset, Any] = UNSET
     type: Union[Unset, AttributeType] = UNSET
     name: Union[Unset, str] = UNSET
     value: Union[Unset, str] = UNSET

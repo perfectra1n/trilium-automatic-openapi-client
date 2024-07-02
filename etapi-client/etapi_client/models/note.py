@@ -1,16 +1,10 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from typing import cast
-from typing import Union
 from ..models.note_type import NoteType
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.attribute import Attribute
@@ -76,9 +70,7 @@ class Note:
         if not isinstance(self.attributes, Unset):
             attributes = []
             for componentsschemas_attribute_list_item_data in self.attributes:
-                componentsschemas_attribute_list_item = (
-                    componentsschemas_attribute_list_item_data.to_dict()
-                )
+                componentsschemas_attribute_list_item = componentsschemas_attribute_list_item_data.to_dict()
                 attributes.append(componentsschemas_attribute_list_item)
 
         parent_note_ids: Union[Unset, List[str]] = UNSET
@@ -166,9 +158,7 @@ class Note:
         attributes = []
         _attributes = d.pop("attributes", UNSET)
         for componentsschemas_attribute_list_item_data in _attributes or []:
-            componentsschemas_attribute_list_item = Attribute.from_dict(
-                componentsschemas_attribute_list_item_data
-            )
+            componentsschemas_attribute_list_item = Attribute.from_dict(componentsschemas_attribute_list_item_data)
 
             attributes.append(componentsschemas_attribute_list_item)
 

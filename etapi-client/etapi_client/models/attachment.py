@@ -1,15 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-
 
 T = TypeVar("T", bound="Attachment")
 
@@ -90,9 +84,7 @@ class Attachment:
         if utc_date_modified is not UNSET:
             field_dict["utcDateModified"] = utc_date_modified
         if utc_date_scheduled_for_erasure_since is not UNSET:
-            field_dict["utcDateScheduledForErasureSince"] = (
-                utc_date_scheduled_for_erasure_since
-            )
+            field_dict["utcDateScheduledForErasureSince"] = utc_date_scheduled_for_erasure_since
         if content_length is not UNSET:
             field_dict["contentLength"] = content_length
 
@@ -119,9 +111,7 @@ class Attachment:
 
         utc_date_modified = d.pop("utcDateModified", UNSET)
 
-        utc_date_scheduled_for_erasure_since = d.pop(
-            "utcDateScheduledForErasureSince", UNSET
-        )
+        utc_date_scheduled_for_erasure_since = d.pop("utcDateScheduledForErasureSince", UNSET)
 
         content_length = d.pop("contentLength", UNSET)
 

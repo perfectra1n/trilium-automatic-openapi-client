@@ -3,11 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.app_info import AppInfo
+from ...types import Response
 
 
 def _get_kwargs() -> Dict[str, Any]:
@@ -19,9 +18,7 @@ def _get_kwargs() -> Dict[str, Any]:
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[AppInfo]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[AppInfo]:
     if response.status_code == HTTPStatus.OK:
         response_200 = AppInfo.from_dict(response.json())
 
@@ -32,9 +29,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[AppInfo]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[AppInfo]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

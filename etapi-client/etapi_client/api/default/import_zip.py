@@ -3,11 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.note_with_branch import NoteWithBranch
+from ...types import Response
 
 
 def _get_kwargs(
@@ -15,9 +14,7 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/notes/{note_id}/import".format(
-            note_id=note_id,
-        ),
+        "url": f"/notes/{note_id}/import",
     }
 
     return _kwargs
