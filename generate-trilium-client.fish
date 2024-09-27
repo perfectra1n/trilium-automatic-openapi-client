@@ -26,10 +26,7 @@ if not type -q openapi-python-client
 end
 
 # Use openapi-python-client to generate a Python client from the YAML file
-openapi-python-client generate --path etapi.yaml --overwrite
-
-# Use openapi-python-client to generate a Python client from the YAML file
-openapi-python-client update --path etapi.yaml --overwrite
+openapi-python-client generate --meta=none --output-path=etapi-client/etapi_client --path etapi.yaml --overwrite
 
 # Deactivate the virtualenv
 deactivate
