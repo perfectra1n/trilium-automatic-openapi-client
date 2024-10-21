@@ -33,11 +33,11 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, LoginResponse201]]:
-    if response.status_code == HTTPStatus.CREATED:
+    if response.status_code == 201:
         response_201 = LoginResponse201.from_dict(response.json())
 
         return response_201
-    if response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
+    if response.status_code == 429:
         response_429 = cast(Any, None)
         return response_429
     if client.raise_on_unexpected_status:
